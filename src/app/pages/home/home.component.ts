@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   titulo !: string;
   descripcion !: string;
-
+  miLista : any[] = [];
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +18,6 @@ export class HomeComponent implements OnInit {
     this.titulo = title;
     this.descripcion = description;
 
-    alert(this.titulo + this.descripcion);
+    this.miLista.push([this.titulo,this.descripcion]);
   }
 }
