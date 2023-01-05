@@ -3,14 +3,14 @@
 
 <div class="grid grid-cols-2 gap-4">
     <!--Home-->
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 contenedor">
         <div class="block p-8 rounded-lg shadow-lg bg-white max-w-md m-5">
-            <form>
+            <form #tareaForm="ngForm">
                 <div class="my-3">
                     <h5 class="text-center text-4xl font-bold text-gray-900 dark:text-dark ">Agregar Tarea</h5>
                 </div>
               <div class="form-group mb-6">
-                <input #title type="text" class="form-control block
+                <input #titulo = "ngModel" name="title" type="text" [ngClass]="{'correct': titulo.valid,'error': titulo.invalid && titulo.touched}" class="form-control block
                   w-full
                   px-3
                   py-1.5
@@ -24,10 +24,11 @@
                   ease-in-out
                   m-0
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"
-                  placeholder="Ingrese Nombre Tarea">
+                  placeholder="Ingrese Nombre Tarea" ngModel required>
+                  <p *ngIf="titulo.invalid && titulo.touched" class="text-red-600">El Campo Titulo es Obligatorio</p>
               </div>
               <div class="form-group mb-6">
-                <textarea #description 
+                <textarea #descripcion = "ngModel" name="description" [ngClass]="{'correct': descripcion.valid,'error': descripcion.invalid && descripcion.touched}"
                 class="
                   form-control
                   block
@@ -47,10 +48,10 @@
                 "
                 id="exampleFormControlTextarea13"
                 rows="3"
-                placeholder="Ingrese Descripción"
-              ></textarea>
+                placeholder="Ingrese Descripción" ngModel required></textarea>
+              <p *ngIf="descripcion.invalid && descripcion.touched" class="text-red-600">El Campo Descripcion es Obligatorio</p>
               </div>
-              <button type="button" class="
+              <button [disabled]="tareaForm.invalid" type="button" class="
                 w-full
                 px-6
                 py-2.5
@@ -67,14 +68,15 @@
                 active:bg-blue-800 active:shadow-lg
                 transition
                 duration-150
-                ease-in-out" (click)="obtenerTarea(title.value,description.value)">Guardar</button>
+                ease-in-out" (click)="obtenerTarea(tareaForm.value)">Guardar</button> <!--(click)="obtenerTarea(title.value,description.value)"-->
             </form>
+            
           </div>
     </div>
 
 
     <!-- Aside -->
-    <div>
+    <div class="px-4">
         <app-aside [tareas]="miLista"></app-aside>
     </div>
 </div>
