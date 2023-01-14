@@ -6,20 +6,21 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./aside.component.css']
 })
 export class AsideComponent implements OnInit {
-  realizado !: string;
+  index !: number;
+  realizado : boolean = false;
   @Input()tareas : any[] = [];
   constructor() { }
 
   ngOnInit(): void {
 
   }
-  estadoTarea(event : any, tarea : string) {
+  estadoTarea(event : any,id:number) {
     if (event.target.checked) {
       // El checkbox ha sido seleccionado
-      this.realizado = tarea;
+      this.tareas[id].realizado = true; //muestra la etiqueta de realizado
     } else {
       // El checkbox ha sido desmarcado
-      this.realizado = "";
+      this.tareas[id].realizado = false; //oculta la etiqueta de realizado
     }
   }
 }
